@@ -70,11 +70,7 @@ function calculate() {
     const formatted = formatDate(resultDate);
 
     document.getElementById("output").innerHTML = `
-        <b>This person took their ${breathNumber.toLocaleString()}th breath at ${formatted}.</b><br><br>
-
-        <b>Formula used:</b><br>
-        time = birthDate (00:00) + (breathNumber ÷ breathsPerMinute)<br>
-        = ${birthInput} 00:00 + (${breathNumber} ÷ ${breathsPerMinute}) minutes
+        <b>This person took their ${breathNumber.toLocaleString()}th breath at ${formatted}.</b>
     `;
 }
 </script>
