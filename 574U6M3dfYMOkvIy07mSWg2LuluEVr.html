@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Breath Time Calculator</title>
+<style>
+    body {
+        font-family: Arial;
+        text-align: center;
+        background: #111;
+        color: white;
+        padding: 30px;
+    }
+    input, button {
+        padding: 10px;
+        margin: 10px;
+        font-size: 16px;
+    }
+    .result {
+        margin-top: 20px;
+        font-size: 18px;
+    }
+</style>
+</head>
+<body>
+
+<h1>Breath Time Calculator</h1>
+
+<p>Enter your birth date & breath number:</p>
+
+<input type="datetime-local" id="birth">
+<br>
+<input type="number" id="breath" placeholder="Breath number">
+<br>
+<button onclick="calculate()">Calculate</button>
+
+<div class="result" id="output"></div>
+
+<script>
+function calculate() {
+    const birthInput = document.getElementById("birth").value;
+    const breathNumber = parseInt(document.getElementById("breath").value);
+
+    if (!birthInput || !breathNumber) {
+        document.getElementById("output").innerHTML = "Please fill in both fields.";
+        return;
+    }
+
+    const birthDate = new Date(birthInput);
+
+    // Average breathing rate: 12 breaths per minute
+    const breathsPerMinute = 12;
+
+    // Formula:
+    // time passed (minutes) = breathNumber / breathsPerMinute
+    const minutesPassed = breathNumber / breathsPerMinute;
+
+    // Convert to milliseconds
+    const timePassedMs = minutesPassed * 60 * 1000;
+
+    const resultDate = new Date(birthDate.getTime() + timePassedMs);
+
+    document.getElementById("output").innerHTML = `
+        <b>Result:</b><br>
+        ${resultDate.toLocaleString()}<br><br>
+
+        <b>Formula used:</b><br>
+        time = birthTime + (breathNumber ÷ breathsPerMinute)<br>
+        = birthTime + (${breathNumber} ÷ ${breathsPerMinute}) minutes
+    `;
+}
+</script>
+
+</body>
+</html>
