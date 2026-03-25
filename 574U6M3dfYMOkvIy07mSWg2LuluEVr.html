@@ -28,7 +28,7 @@
 
 <p>Enter your birth date & breath number:</p>
 
-<input type="datetime-local" id="birth">
+<input type="date" id="birth">
 <br>
 <input type="number" id="breath" placeholder="Breath number">
 <br>
@@ -46,27 +46,22 @@ function calculate() {
         return;
     }
 
-    const birthDate = new Date(birthInput);
+    const birthDate = new Date(birthInput + "T00:00:00");
 
-    // Average breathing rate: 12 breaths per minute
     const breathsPerMinute = 12;
 
-    // Formula:
-    // time passed (minutes) = breathNumber / breathsPerMinute
     const minutesPassed = breathNumber / breathsPerMinute;
-
-    // Convert to milliseconds
     const timePassedMs = minutesPassed * 60 * 1000;
 
     const resultDate = new Date(birthDate.getTime() + timePassedMs);
 
     document.getElementById("output").innerHTML = `
-        <b>Result:</b><br>
+        <b>This person took their ${breathNumber.toLocaleString()}th breath at:</b><br><br>
         ${resultDate.toLocaleString()}<br><br>
 
         <b>Formula used:</b><br>
-        time = birthTime + (breathNumber ÷ breathsPerMinute)<br>
-        = birthTime + (${breathNumber} ÷ ${breathsPerMinute}) minutes
+        time = birthDate (00:00) + (breathNumber ÷ breathsPerMinute)<br>
+        = ${birthInput} 00:00 + (${breathNumber} ÷ ${breathsPerMinute}) minutes
     `;
 }
 </script>
